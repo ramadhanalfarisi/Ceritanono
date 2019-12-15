@@ -1,30 +1,210 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+  ImageBackground,
+} from 'react-native';
 import PageBaca from './PageBaca';
-import PageBacaLain from './PageBacaLain';
+import SoundPlayer from 'react-native-sound-player';
 
+const HEIGHT = Dimensions.get('window').height;
+const WIDTH = Dimensions.get('window').width;
 // create a component
 class Baca extends Component {
+  constructor() {
+    super();
+    this.scrolling = this.scrolling.bind(this);
+  }
+
   state = {
     content: [
-      'Alkisah pada jaman dahulu kala seekor babi tengah melintas di sebuah hutan belantara. Babi hutan itu sedang merasa kehausan di tengah panasnya terik matahari. Pada saat dia mencari-cari mata air, dia melihat ada air yang tertampung di pohon keladi hutan. Segera diminumnya air itu untuk melepas dahaga. Tanpa disadarinya air itu adalah air seni Raja Sungging Perbangkara. Karena kesaktian Raja Sungging Perbangkara, babi hutan itu pun mengandung setelah meminum air seninya. Sembilan bulan kemudian si babi hutan melahirkan seorang bayi perempuan.Raja Sungging Perbangkara mengetahui perihal adanya bayi perempuan yang terlahir karena air seninya itu. Ia pun pergi ke hutan untuk mencarinya. Ditemukannya bayi prempuan itu. Dia pun memberinya nama Dayang Sumbi dan membawanya pulang ke istana kerajaan. Dayang Sunbi tumbuh menjadi perempuan yang sangat cantik wajahnya. Serasa tak terbilang jumlah raja, pangeran dan bangsawan yang berkehendak memperistri anak perempuan Raja Sungging Perbangkara itu.',
-      'Namun, semua pinangan itu di tolak Dayang Sumbi dengan halus. Sama sekali tidak diduga oleh Dayang Sumbi , mereka yang ditolak pinangannya itu saling berperang sendiri untuk memperebutkan dirinya. Dayang Sumbi sangat bersedih mengetahui kenyataan bahwa para pangeran, raja dan bangsawan yang ditolaknya saling melakukan peperangan. Dia pun memohon kepada Raja Sungging Perbangkara untuk mengasingkan diri. Sang Raja akhirnya mengijinkan anaknya tersebut untuk mengasingkan diri. Dayang Sumbi mengasingkan diri di sebuah bukit ditemani oleh seekor anjing jantan bernama si tumang. Untuk mengisi waktu luangnya selama dalam pengasingan, Dayang Sumbi pun menenun. Alkisah, ketika Dayang Sumbi sedang menenun, peralatan tenunannya terjatuh. Ketika itu Dayang Sumbi merasa malas untuk mengambilnya. Terlontarlah ucapan yang tidak terlalu disadarinya.” Siapapun juga yang bersedia mengambilkan peralatan tenunku yang terjatuh, seandainya itu lelaki akan kujadikan suami, jika dia perempuan dia akan kujadikan saudara.” Tak disangka si tumang mengambil peralatan tenun yang terjatuh itu dan memberikannya kepada Dayang Sumbi.Tidak ada yang dapat diperbuat Dayang Sumbi selain memenuhi ucapannya. Dia menikah dengan Si Tumang yang ternyata titisan dewa. Si Tumang adalah dewa yang dikutuk menjadi hewan dan dibuang ke bumi. Beberapa bulan setelah menikah, Dayang Sumbi pun mengandung dan melahirkan seorang bayi laki-laki. Dayang Sumbi memberinya nama Sangkuriang.',
-      'Waktu terus berlalu. Beberapa tahun kemudian terlewati. Sangkuriang telah tumbuh menjadi seorang pemuda yang tampan wajahnya. Gagah. Tubuhnya kuat dan kekar. Sakti mandraguna pula anak Dayang Sumbi ini. Sejak kecil Sangkuriang telah senang berburu. Setiap kali melakukan perburuan di hutan. Sangkuriang senantiasa ditemani oleh si tumang. Sama sekali Sangkuriang tidak tahu bahwa si Tumang adalah ayah kandungnya.Pada suatu hari Sangkuriang dengan di temani Si Tumang kembali meakukan perburuan di hutan. Sangkuriang berniat mencari kijang karena ibunya sangat menghendaki memakan hati kijang. Setelah beberapa saat berada di dalam hutan, Sangkuriang melihat seekor kijang yang tengah merumput di balik semak belukar. Sangkuriang memerintahkan si tumang untuk mengejar kijang itu Sangat aneh, si Tumang yang biasanya penurut, ketika itu tidak menuruti perintahnya. Sangkuriang menjadi marah. Katanya.” Jika engkau tetap tidak menuruti perintahku, niscaya aku akan mebunuhmu.” Ancaman Sangkuriang seakan tidak dipedulikan si Tumang. Karena jengkel dan marah, Sangkuriang lantas membunuh si Tumang. Hati anjing hitam itu diambilnya dan dibawanya pulang ke rumah. Sangkuriang memberikan hati si Tumang kepada ibunya untuk dimasak.Tanpa disadari Dayang Sumbi bahwa hati yang diberikan anaknya adalah hati suaminya. Dia kemudian memasak dan memakan hati itu. Maka, tak terperikan amarah Dayang Sumbi kepada Sangkuriang ketika dia tahu hati yang dimakannya adalah hati si Tumang.',
-      'Dia lalu meraih gayung yang terbuat dari tempurung kelapa dan memukul kepala Sangkuriang, hingga kepala Sangkuriang terluka. Sangkuriang sangat marah dan sakit hati dengan perlakuan ibunya itu. Menurutnya, Ibunya lebih menyayangi si Tumang dibandingkan dirinya. Maka, tanpa pamit kepada Dayang Sumbi ibunya, Sangkuriang lantas pergi mengembara ke arah timur. Dayang Sumbi sangat menyesal setelah mengetahui kepergian Sangkuriang anaknya. Dia pun bertapa dan memohon ampun kepada para dewa atas kesalahan yang diperbuatnya. Para dewa mendengar permintaan Dayang Sumbi, mereka menerima permintaan maaf itu dan mengaruniakan Dayang Sumbi kecantikan abadi. Syahdan, Sangkuriang terus mengembara tanpa tujuan yang pasti. Dalam pengembaraanya Sangkuriang terus menambah kesaktiannya dengan berguru kepada orang-orang sakti yang ditemuinya selama pengembaraan. Bertahun-tahun Sangkuriang mengembara tanpa disadari dia kembali ke tempat dimana dia dahulu dilahirkan. Sangkurian terpesona dengan kecantikan Dayang Sumbi yang abadi, dia tidak menyadari bahwa perempuan cantik yang ditemuinya di hutan adalah ibu kandungnya sendiri. Hal yang sama terjadi juga pada Dayang Sumbi yang tidak menyadari pemuda gagah yang sakti itu adalah Sangkuriang anaknya. Karena saling jatuh cinta mereka merencenakan untuk menikah.Sebelum pernikahan dialngsungkan Sangkuriang berniat untuk berburu. Dayang Sumbi membantu Sangkuriang mengenakan penutup kepala. Ketika itulah dayang Sumbi melihat luka di kepala calon suaminya.',
-      'Teringatlah dia pada anak lelakinya yang telah meninggalkannya. Dia sangat yakin pemuda gagah itu tidak lain adalah Sangkuriang anaknya. Dayang Sumbi kemudian menjelaskan bahwa dai sesungguhnya adalah ibu kandung dari Sangkuriang. Oleh karena itu dia tidak bersedia menikah dengan anak kandungnya tersebut. Namun, Sangkuriang yang telah dibutakan oleh hawa nafsu tidak memperdulikan penjelasan Dayang Sumbi, dia tetap bersikukuh akan menikahi Dayang Sumbi. “Jika memang begitu kuat keinginanmu untuk menikahiku, aku mau engkau memenuhi satu permintaanku” Kata Dayang Sumbi. “Apa permintaan yang engkau kehendaki.” Tantang Sangkuriang. Dayang Sumbi mengajukan syarat yang laur biasa berat yaitu dia ingi sungai citarum dibendung untuk dibuat danau, dan didalam danau itu ada perahu besar.” Semua itu harus dapat engkau selesaikan dalam waktu satu malam.” Ucap Dayang Sumbi.” Sebelum fajar terbit, kedua permintaanku itu harus telah selesai engaku kerjakan.” Tanpa ragu Sangkuriang menyanggupi permintaan dari Dayang Sumbi.” Baiklah, aku akan memenuhi permintaanmu.” Sangkuriang segera bekerja mewujudkan permintaan Dayang sumbi. Pertama kali dia menebang pohon besar untuk dibuatnya sebuah perahu. Cabang dan ranting pohon yang tidak dibutuhkannya ditumpukan. Tumpukan cabang dan ranting pohon itu dikemudian hari menjelma menjadi gunung Burangrang.Begitu pula tunggul pohpon itu kemudian berubah menjadi sebuah gunung yang lebih dikenal gunung bukit tinggul.',
-      'Perahu besar itu akhirnya selesai dibuat Sangkuriang. Pemuda Sakti itu lantas berniat membendung aliran sungai Citarum yang deras untuk dibuat sebuah danau. Sangkuriang kemudian memanggi para makhluk halus untuk membantunya mewujudkan permintaan Dayang sumbi. Semua yang dilakukan Sangkuriang diketahii oleh Dayang Sumbi. Terbit kecemasan dalam hati Dayang Sumbi ketika melihat pekerjaan Sangkuriang sebentar lagi selesai. Dia harus menggagalkan pekerjaan Sangkuriang agar pernikahan dengan anak kandungnya itu tidak terlaksana. Dia pun memohon pertolongan dari para Dewa. Setelah berdoa, Dayang Sumbi mendapatkan petunjuk. Dayang Sumbi lantas menebarkan boeh rarang (kain putih hasil tenunan). Dia juga memkasa ayam jantan berkokok disaat waktu masih malam. Para makhluk halus sangat ketakutan ketika mengetahui fajar telah tiba. Mereka berlari dan menghilang kesegala penjuru. Mereka meninggalkan pekerjaannya membuat danau dan perahu yang belum selesai. Sangkuriang sangat marah. Dia merasa Dayang Sumbi telah berlaku curang kepadanya. Ida sangat yakin jika fajar sesungguhnya belum tiba. Dia merasa masih tersedia waktu baginya untuk menyelesaikan pekerjaan. Dengan kemarahan tinggi, Sangkuriang lantas menjebol bendungan di Sanghyang Tikoro. Sumbat aliran citarum lantas dilemparkannya ke arah timur yang kemudian menjelma menjadi gunung Manglayang. Air yang semula memenuhi danau itu pun menjadi surut. Serasa belum reda kemarahannya. Sangkuriang lantas menendang perahu besar yang telah dibuatnya hingga terlempat jauh dan jatuh tertelungkup.',
-      'Menjelmalah perahu besar itu menjadi sebuah gunung yang kemudian di sebut gunung Tangkuban Perahu. Kemarahan Sangkuriang belum reda. Dia mengetahui, semua itu sesungguhnya adalah siasat dari Dayang Sumbi untuk menggagalkan pernikahan dengannya. Dengan kemarahan yang terus meluap, Dayang sumbi pun dikejarnya. Dayang sumbi yang ketakutan terus berlari untuk menghindar hingga akhirnya menghilang di sebuah bukit. Bukit itu kemudian menjelma menjadi gunung Putri. Sedangkan Sangkuriang yang tidak berhasil menemukan Dayang Sunbi akhirnya menghilang ke alam gaib. “Pesan Moral dari Legenda Asal Muasal Gunung Tangkuban Perahu : Kisah Sangkuriang adalah Bersikaplah untuk jujur karena kejujuran akan membawa kebaikan dan kebahagiaan di kemudian hari. Perbuatan curang akan merugikan diri sendiri serta bisa mendatangkan musibah bagi diri sendiri ataupun orang lain.”',
+      {
+        fill:
+          'Pada zaman dahulu, terdapat kerajaan pakuan penjajahan yang dipimpin oleh raja prabu Siliwangi, sang prabu memiliki anak yang bernama Putri Kandita, ia gadis yang sangat cantik, dan memiliki sifat seperti ayahnya. Ia juga merupakan calon pewaris tahta raja Prabu Siliwangi. Mendengar hal tersebut para selir dan anak-anak lainnya tidak setuju.',
+        back: require('../assets/background/paragraf1.jpg'),
+        color: '#000',
+        lagu: 'par1',
+      },
+      {
+        fill:
+          'Suatu hari para selir dan anak-anak membuat suatu rencana yaitu meminta bantuan kepada penyihir sakti. Dengan ilmu hitamnya ia menyihir Putri Kandita dan ibunya agar memberikan penyakit kusta yaitu berubah menjadi wajah buruk serta tubuh penuh dengan borok dan mengeluarkan bau tak sedap.',
+        back: require('../assets/background/paragraf2.jpg'),
+        color: '#130f40',
+        lagu: 'par2',
+      },
+      {
+        fill:
+          'Tanpa menunggu lama, sang penyihir melaksankannya. Dengan ilmu hitam ia menyihir Putri Kandita dan ibunya agar menderita penyakit kusta. Putri Kandita dan sang permaisuri mengidap penyakit kusta yang tak kunjung sembuh. Prabu Siliwangi yang merasa heran melihat penyakit aneh pada dua orang kesayangannya itu langsung memanggil tabib istana untuk melakukan pengobatan.',
+        back: require('../assets/background/paragraf3.jpg'),
+        color: '#000',
+        lagu: 'par3',
+      },
+      {
+        fill:
+          'Hari demi hari penyakit Putri Kandita dan ibunya bertambah parah. Tubuh mereka semakin lemas karena tidak dapat mencerna makanan dan minuman. Putri Kandita masih bertahan menghadapi penyakitnya. Sang ibunda ternyata tidak dapat bertahan hingga akhirnya menghembuskan nafas terakhir.',
+        back: require('../assets/background/paragraf4.jpg'),
+        color: '#130f40',
+        lagu: 'par4',
+      },
+      {
+        fill:
+          'Putri Kandita dan raja sangat terpukul dengan meninggalnya permaisuri. Namun sang prabu pun merasa sangat terpukul melihat kondisi Putri Kandita yang tidak menunjukkan tanda-tanda kesembuhan. Prabu Siliwangi sangat sangat cemas karena Putri Kandita yang akan meneruskan tahta kerajaan.',
+        back: require('../assets/background/paragraf4.jpg'),
+        color: '#130f40',
+        lagu: 'par5',
+      },
+      {
+        fill:
+          'Suatu hari, para Selir dan anak-anaknya datang menemui Raja untuk menghasut agar Putri Kandita diusir. Awalnya, Raja menolak. Namun karena takut penyakitnya menular, dengan terpaksa Prabu Siliwangi menyetujui usulan tersebut. Tanpa sepengetahuan raja, selir, dan saudara-saudaranya, Putri Kandita yang mendengar pembicaraan tersebut sangat kecewa.',
+        back: require('../assets/background/paragraf5.jpg'),
+        color: '#95a5a6',
+        lagu: 'par6',
+      },
+      {
+        fill:
+          'Ia memutuskan untuk melarikan diri dari istana. Dalam suasana hati yang sedih, bingung, dan tidak menentu, Putri Kandita berjalan keluar dari istana tanpa tujuan yang pasti. Selama berhari-hari, ia berjalan tanpa tujuan hingga tiba di pantai selatan Pulau Jawa yang memiliki banyak batu karang dan ombak besar. Di salah satu batu karang itu dia istirahat hingga tertidur karena kelelahan.',
+        back: require('../assets/background/paragraf5.jpg'),
+        color: '#95a5a6',
+        lagu: 'par7',
+      },
+      {
+        fill:
+          'Dalam tidurnya, Putri Kandita bermimpi mendengar sebuah suara gaib yang menyuruhnya menceburkan diri ke laut agar penyakitnya sembuh dan sehat seperti sediakala. Putri Kandita pun terbangun dari tidurnya. Ia lalu merenung meresapi kata-kata gaib tersebut karena ragu apakah suara itu merupakan sebuah wangsit atau hanya orang iseng yang membisiki saat dia tertidur.',
+        back: require('../assets/background/paragraf6.jpg'),
+        color: '#130f40',
+        lagu: 'par8',
+      },
+      {
+        fill:
+          'Tetapi setelah melihat sekeliling, sejauh mata memandang yang ada hanyalah hamparan pasir putih beserta ombak bergulung-gulung di sekitarnya. Oleh karena itu, yakinlah Putri Kandita bahwa suara gaib tadi merupakan sebuah wangsit yang harus dia laksanakan demi kesembuhan dirinya.',
+        back: require('../assets/background/paragraf6.jpg'),
+        color: '#130f40',
+        lagu: 'par9',
+      },
+      {
+        fill:
+          'Ia pun segera melakukan apa yang diperintakan. Pada saat menyentuh air, penyakitnya berangsur membaik dan hilang. Kesembuhan penyakitnya membuat ia tidak pulang ke istana lagi dan menetap di Pantai Selatan dengan para nelayan.',
+        back: require('../assets/background/paragraf7.jpg'),
+        color: '#000',
+        lagu: 'par10',
+      },
+      {
+        fill:
+          'Sejak tinggal di Pantai Selatan, Putri Kandita terkenal sebagai wanita yang sangat cantik. Banyak pangeran kerajaan yang ingin melamarnya, tetapi ia tidak tertarik dengan pangeran tersebut. Putri Kandita pun juga mengajukan persyaratan bahwa siapa yang ingin menikah dengannya harus mengadu kesaktian di atas gelombang laut.',
+        back: require('../assets/background/paragraf7.jpg'),
+        color: '#000',
+        lagu: 'par11',
+      },
+      {
+        fill:
+          'Dari persyaratan tersebut, ada beberapa pangeran yang mengundurkan diri, dan ada juga yang menerima persyaratan itu. Dari persyaratan yang diajukan, tidak ada satu pun pangeran kerajaan yang bisa mengalahkan Putri Kandita, hingga mereka menjadi pengikut setia. Sejak saat itu lah Putri Kandita dijuluki Nyi Roro Kidul. ',
+        back: require('../assets/background/paragraf7.jpg'),
+        color: '#000',
+        lagu: 'par12',
+      },
     ],
     selectedIndex: 0,
+    currentPosition: 0,
+    statusSound: 'OFF',
   };
 
-  setSelectedIndex = event => {
-    const viewSize = event.nativeEvent.layoutMeasurement.width;
-    const contentoffset = event.nativeEvent.contentOffset.x;
-    const selectedIndex = Math.floor(contentoffset / viewSize);
-    this.setState({selectedIndex: selectedIndex});
-  };
+  componentDidMount() {
+    SoundPlayer.playSoundFile('par1', 'mp3');
+    this.activeInterval = setInterval(this.scrolling, 27000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.activeInterval);
+    SoundPlayer.stop();
+  }
+
+  scrolling() {
+    // Start scrolling if there's more than one stock to display
+    if (this.state.content.length > 1) {
+      // Increment position with each new interval
+      const position = this.state.currentPosition + 360;
+      this.ticker.scrollTo({x: position, animated: true});
+      const inter = this.state.selectedIndex + 1;
+      SoundPlayer.playSoundFile(this.state.content[inter].lagu, 'mp3');
+      // After position passes this value, snaps back to beginning
+      let maxOffset = 20000;
+      // Set animation to repeat at end of scroll
+      if (this.state.currentPosition > maxOffset) {
+        clearInterval(this.activeInterval);
+      } else {
+        this.setState({currentPosition: position});
+        this.setState({
+          selectedIndex: inter,
+        });
+      }
+    }
+  }
+
+  masukEvaluasi() {
+    clearInterval(this.activeInterval);
+    SoundPlayer.stop();
+    this.props.navigation.navigate('Evaluasi');
+  }
+
+  selanjutnya() {
+    if (this.state.content.length > 1) {
+      // Increment position with each new interval
+      const position = this.state.currentPosition + 360;
+      this.ticker.scrollTo({x: position, animated: true});
+      const inter = this.state.selectedIndex + 1;
+      SoundPlayer.playSoundFile(this.state.content[inter].lagu, 'mp3');
+      // After position passes this value, snaps back to beginning
+      let maxOffset = 20000;
+      // Set animation to repeat at end of scroll
+      if (this.state.currentPosition > maxOffset) {
+        clearInterval(this.activeInterval);
+      } else {
+        this.setState({currentPosition: position});
+        this.setState({
+          selectedIndex: inter,
+        });
+      }
+    }
+  }
+
+  sebelumnya() {
+    if (this.state.content.length > 1) {
+      // Increment position with each new interval
+      const position = this.state.currentPosition - 360;
+      this.ticker.scrollTo({x: position, animated: true});
+      const inter = this.state.selectedIndex - 1;
+      SoundPlayer.playSoundFile(this.state.content[inter].lagu, 'mp3');
+      // After position passes this value, snaps back to beginning
+      let maxOffset = 20000;
+      // Set animation to repeat at end of scroll
+      if (this.state.currentPosition > maxOffset) {
+        clearInterval(this.activeInterval);
+      } else {
+        this.setState({currentPosition: position});
+        this.setState({
+          selectedIndex: inter,
+        });
+      }
+    }
+  }
+  controlSound(status) {
+    if (status === 'OFF') {
+      SoundPlayer.setVolume(0);
+      this.setState({
+        statusSound: 'ON',
+      });
+    } else {
+      SoundPlayer.setVolume(1);
+      this.setState({
+        statusSound: 'OFF',
+      });
+    }
+  }
 
   render() {
     return (
@@ -37,50 +217,230 @@ class Baca extends Component {
               fontWeight: '600',
               flexWrap: 'wrap',
             }}>
-            Asal-usul Tangkuban Perahu
+            Legenda Nyi Roro Kidul
           </Text>
         </View>
-        <View style={{paddingTop: 25, alignItems: 'center'}}>
+        <View style={{alignSelf: 'flex-end', paddingRight: 25, paddingTop: 15}}>
+          <TouchableOpacity
+            onPress={() => this.controlSound(this.state.statusSound)}
+            style={{
+              width: 90,
+              height: 30,
+              backgroundColor: '#2c3e50',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 5,
+            }}>
+            <Text style={{color: '#fff', fontSize: 15}}>
+              SOUND {this.state.statusSound}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{paddingTop: 15, alignItems: 'center'}}>
           <ScrollView
             horizontal
             pagingEnabled
+            scrollEnabled={false}
+            ref={ref => (this.ticker = ref)}
             showsHorizontalScrollIndicator={false}
-            onMomentumScrollEnd={this.setSelectedIndex}
             style={{zIndex: 1}}
             contentContainerStyle={{justifyContent: 'space-between'}}>
             {this.state.content.map((item, index) => {
               if (index === 0) {
-                return <PageBaca content={item} />;
+                return (
+                  <View style={{paddingHorizontal: 25}}>
+                    <ImageBackground
+                      source={item.back}
+                      style={{
+                        height: 480,
+                        width: WIDTH - 50,
+                        borderRadius: 10,
+                        alignItems: 'center',
+                      }}>
+                      <View
+                        style={{paddingHorizontal: 15, paddingVertical: 10}}>
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            fontWeight: 'bold',
+                            color: item.color,
+                          }}>
+                          {item.fill}
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                    <TouchableOpacity
+                      style={{
+                        height: 40,
+                        width: 120,
+                        borderRadius: 10,
+                        backgroundColor: '#192a56',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginTop: 10,
+                        alignSelf: 'flex-end',
+                      }}
+                      onPress={() => this.selanjutnya()}>
+                      <Text
+                        style={{
+                          color: '#fff',
+                          fontSize: 15,
+                          fontWeight: 'bold',
+                        }}>
+                        SELANJUTNYA
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                );
+              } else if (index > 0 && index !== this.state.content.length - 1) {
+                return (
+                  <View style={{paddingHorizontal: 25}}>
+                    <ImageBackground
+                      source={item.back}
+                      style={{
+                        height: 480,
+                        width: WIDTH - 50,
+                        borderRadius: 10,
+                        alignItems: 'center',
+                      }}>
+                      <View
+                        style={{paddingHorizontal: 15, paddingVertical: 10}}>
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            fontWeight: 'bold',
+                            color: item.color,
+                          }}>
+                          {item.fill}
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between',
+                      }}>
+                      <TouchableOpacity
+                        style={{
+                          height: 40,
+                          width: 120,
+                          borderRadius: 10,
+                          backgroundColor: '#192a56',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginTop: 10,
+                        }}
+                        onPress={() => this.sebelumnya()}>
+                        <Text
+                          style={{
+                            color: '#fff',
+                            fontSize: 15,
+                            fontWeight: 'bold',
+                          }}>
+                          SEBELUMNYA
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={{
+                          height: 40,
+                          width: 120,
+                          borderRadius: 10,
+                          backgroundColor: '#192a56',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginTop: 10,
+                        }}
+                        onPress={() => this.selanjutnya()}>
+                        <Text
+                          style={{
+                            color: '#fff',
+                            fontSize: 15,
+                            fontWeight: 'bold',
+                          }}>
+                          SELANJUTNYA
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                );
               } else {
-                return <PageBacaLain content={item} />;
+                return (
+                  <View style={{paddingHorizontal: 25}}>
+                    <ImageBackground
+                      source={item.back}
+                      style={{
+                        height: 480,
+                        width: WIDTH - 50,
+                        borderRadius: 10,
+                        alignItems: 'center',
+                      }}>
+                      <View
+                        style={{paddingHorizontal: 15, paddingVertical: 10}}>
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            fontWeight: 'bold',
+                            color: item.color,
+                          }}>
+                          {item.fill}
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between',
+                      }}>
+                      <TouchableOpacity
+                        style={{
+                          height: 40,
+                          width: 120,
+                          borderRadius: 10,
+                          backgroundColor: '#192a56',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginTop: 10,
+                          alignSelf: 'flex-end',
+                        }}
+                        onPress={() => this.sebelumnya()}>
+                        <Text
+                          style={{
+                            color: '#fff',
+                            fontSize: 15,
+                            fontWeight: 'bold',
+                          }}>
+                          SEBELUMNYA
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={{
+                          height: 40,
+                          width: 120,
+                          borderRadius: 10,
+                          backgroundColor: '#192a56',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginTop: 10,
+                          alignSelf: 'flex-end',
+                        }}
+                        onPress={() => this.masukEvaluasi()}>
+                        <Text
+                          style={{
+                            color: '#fff',
+                            fontSize: 15,
+                            fontWeight: 'bold',
+                          }}>
+                          EVALUASI
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                );
               }
             })}
           </ScrollView>
-          <View
-            style={{
-              height: 10,
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              paddingTop: 20,
-            }}>
-            {this.state.content.map((item, index) => {
-              return (
-                <View
-                  key={item}
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 5,
-                    margin: 3,
-                    backgroundColor:
-                      index === this.state.selectedIndex ? '#FFF' : '#C4C4C4',
-                  }}
-                />
-              );
-            })}
-          </View>
         </View>
       </View>
     );

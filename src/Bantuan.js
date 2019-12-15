@@ -48,7 +48,7 @@ class Bantuan extends Component {
               <View
                 style={{
                   width: WIDTH - 100,
-                  height: 300,
+                  height: 250,
                   backgroundColor: '#fff',
                   borderRadius: 5,
                   paddingTop: 15,
@@ -76,25 +76,7 @@ class Bantuan extends Component {
                       2. Pilih dan klik cerita pada daftar cerita
                     </Text>
                     <Text style={{fontSize: 13, fontWeight: '600'}}>
-                      3. Pilih “Baca”
-                    </Text>
-                  </View>
-                </View>
-                <View style={{paddingTop: 20}}>
-                  <View style={{paddingHorizontal: 10}}>
-                    <Text style={{fontSize: 16, fontWeight: '600'}}>
-                      Lihat Animasi Cerita
-                    </Text>
-                  </View>
-                  <View style={{paddingHorizontal: 10, paddingTop: 10}}>
-                    <Text style={{fontSize: 13, fontWeight: '600'}}>
-                      1. Klik tombol “Cerita”
-                    </Text>
-                    <Text style={{fontSize: 13, fontWeight: '600'}}>
-                      2. Pilih dan klik cerita pada daftar cerita
-                    </Text>
-                    <Text style={{fontSize: 13, fontWeight: '600'}}>
-                      3. Pilih “Animasi”
+                      3. Setelah itu, halaman baca akan tampil
                     </Text>
                   </View>
                 </View>

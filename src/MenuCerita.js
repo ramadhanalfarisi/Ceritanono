@@ -8,8 +8,7 @@ import {
   Image,
   FlatList,
   TouchableHighlight,
-  Animated,
-  TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import ImageScroll from './ImageScroll';
@@ -20,7 +19,6 @@ const WIDTH = Dimensions.get('window').width;
 class MenuCerita extends Component {
   constructor() {
     super();
-    this.munculModal = new Animated.Value(1000);
   }
   state = {
     cerita: [
@@ -28,31 +26,37 @@ class MenuCerita extends Component {
         nama: 'Malin Kundang',
         daerah: 'Sumatera Barat',
         photo: require('../assets/malin.jpg'),
+        status: false,
       },
       {
-        nama: 'Asal-usul Tangkuban Perahu',
+        nama: 'Legenda Nyi Roro Kidul',
         daerah: 'Jawa Barat',
-        photo: require('../assets/sangkuriang.jpg'),
+        photo: require('../assets/rorokidul.jpg'),
+        status: true,
       },
       {
         nama: 'Roro Jonggrang',
         daerah: 'Jawa Barat',
         photo: require('../assets/roro.jpg'),
+        status: false,
       },
       {
         nama: 'Jaka Tarub',
         daerah: 'Jawa Timur',
         photo: require('../assets/tarub.jpg'),
+        status: false,
       },
       {
         nama: 'Asal-usul Danau Toba',
         daerah: 'Sumatera Utara',
         photo: require('../assets/toba.jpg'),
+        status: false,
       },
       {
         nama: 'Lutung Kasarung',
         daerah: 'Jawa Barat',
         photo: require('../assets/lutung.jpg'),
+        status: false,
       },
     ],
     namaCerita: '',
@@ -60,33 +64,12 @@ class MenuCerita extends Component {
     photoCerita: '',
   };
 
-  baca() {
-    this.props.navigation.navigate('Baca');
-    this.hide();
-  }
-
-  animasi() {
-    this.props.navigation.navigate('Animasi');
-    this.hide();
-  }
-
-  muncul(nama, daerah, photo) {
-    this.setState({
-      namaCerita: nama,
-      daerahCerita: daerah,
-      photoCerita: photo,
-    });
-    Animated.spring(this.munculModal, {
-      toValue: HEIGHT - 500,
-      friction: 6,
-    }).start();
-  }
-
-  hide() {
-    Animated.spring(this.munculModal, {
-      toValue: 1000,
-      friction: 10,
-    }).start();
+  baca(status) {
+    if (status === true) {
+      this.props.navigation.navigate('Baca');
+    } else {
+      ToastAndroid.show('Masih Dalam Pengembangan !', ToastAndroid.SHORT);
+    }
   }
 
   render() {
@@ -114,7 +97,9 @@ class MenuCerita extends Component {
             </Text>
           </View>
           <View style={{paddingTop: 30, paddingHorizontal: 20}}>
-            <ScrollView horizontal={true}>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
               <ImageScroll image={require('../assets/malin.jpg')} />
               <ImageScroll image={require('../assets/roro.jpg')} />
               <ImageScroll image={require('../assets/tarub.jpg')} />
@@ -122,98 +107,6 @@ class MenuCerita extends Component {
             </ScrollView>
           </View>
         </View>
-        <Animated.View
-          style={{
-            height: 300,
-            width: WIDTH - 100,
-            top: this.munculModal,
-            left: WIDTH - 310,
-            backgroundColor: '#E0E0E0',
-            position: 'absolute',
-            zIndex: 1,
-            borderRadius: 20,
-          }}>
-          <TouchableOpacity onPress={() => this.hide()}>
-            <View
-              style={{
-                width: 24,
-                height: 24,
-                backgroundColor: '#d63031',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 30,
-                marginLeft: WIDTH - 135,
-                marginTop: 10,
-              }}>
-              <Text style={{color: '#fff', fontSize: 15}}>X</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={{alignItems: 'center', paddingTop: 5}}>
-            <View
-              style={{
-                height: 120,
-                width: WIDTH - 120,
-              }}>
-              <Image
-                source={this.state.photoCerita}
-                style={{flex: 1, width: null, height: null, borderRadius: 10}}
-              />
-            </View>
-          </View>
-          <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
-            <Text style={{fontSize: 16, fontWeight: 'bold'}}>
-              {this.state.namaCerita}
-            </Text>
-            <Text style={{color: '#828282'}}>{this.state.daerahCerita}</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 20,
-            }}>
-            <TouchableOpacity
-              style={{
-                height: 40,
-                width: 100,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#3C6382',
-                borderRadius: 10,
-              }}
-              onPress={() => this.baca()}>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  width: 35,
-                }}>
-                Baca
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                height: 40,
-                width: 100,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#3C6382',
-                borderRadius: 10,
-              }}
-              onPress={() => this.animasi()}>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  width: 55,
-                }}>
-                Animasi
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </Animated.View>
         <ScrollView>
           <View style={{paddingVertical: 20}}>
             <View style={{paddingHorizontal: 20}}>
@@ -249,13 +142,7 @@ class MenuCerita extends Component {
                 renderItem={item => {
                   return (
                     <TouchableHighlight
-                      onPress={() =>
-                        this.muncul(
-                          item.item.nama,
-                          item.item.daerah,
-                          item.item.photo,
-                        )
-                      }>
+                      onPress={() => this.baca(item.item.status)}>
                       <View
                         style={{
                           width: WIDTH - 210,

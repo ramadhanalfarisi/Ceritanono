@@ -1,6 +1,12 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+} from 'react-native';
 
 const HEIGHT = Dimensions.get('window').height;
 const WIDTH = Dimensions.get('window').width;
@@ -9,30 +15,31 @@ class PageBaca extends Component {
   render() {
     return (
       <View style={{paddingHorizontal: 25}}>
-        <View
+        <ImageBackground
+          source={this.props.gambar}
           style={{
             height: 510,
             width: WIDTH - 50,
-            backgroundColor: '#E0E0E0',
             borderRadius: 10,
             paddingVertical: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
           }}>
-          <View style={{alignItems: 'center', paddingTop: 10}}>
-            <Image
-              source={require('../assets/sangkuriang.jpg')}
+          <View
+            style={{
+              paddingHorizontal: 15,
+              paddingVertical: 10,
+            }}>
+            <Text
               style={{
-                width: WIDTH - 100,
-                height: 100,
-                borderRadius: 10,
-              }}
-            />
-          </View>
-          <View style={{paddingHorizontal: 15, paddingVertical: 10}}>
-            <Text style={{fontSize: 12, fontWeight: 'bold'}}>
+                fontSize: 16,
+                fontWeight: 'bold',
+                color: this.props.color,
+              }}>
               {this.props.content}
             </Text>
           </View>
-        </View>
+        </ImageBackground>
       </View>
     );
   }
